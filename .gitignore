@@ -1,0 +1,16 @@
+cd ~\Projects\HockeyStatsHub
+```
+
+Then let's create a `.gitignore` so you don't accidentally commit thousands of dependency files. Create a new file called `.gitignore` in the root of `HockeyStatsHub` with this content:
+```
+# Backend
+backend/bin/
+backend/obj/
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+
+# IDE files
+.vs/
+*.user
