@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Oil Doctors – Madison Heights, MI</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #c0392b;
+      --dark-red: #96281b;
+      --charcoal: #1a1a1a;
+      --mid: #2c2c2c;
+      --light-gray: #f4f4f4;
+      --white: #ffffff;
+      --accent: #e74c3c;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--white);
+      color: var(--charcoal);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      color: var(--white);
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--red);
+      color: var(--white) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 4px;
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: var(--dark-red); color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--charcoal) 0%, #2d2d2d 60%, #3a1a1a 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center top, rgba(192,57,43,0.25) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 1.15rem;
+      color: #ccc;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+      padding: 0.8rem 2rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--dark-red); transform: translateY(-1px); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.4);
+      color: var(--white);
+      padding: 0.8rem 2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.07); }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--red);
+      color: var(--white);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .trust-item {
+      padding: 1rem 2.5rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.2);
+      flex: 1 1 160px;
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-item strong { display: block; font-size: 1.5rem; font-weight: 900; }
+    .trust-item span { font-size: 0.8rem; opacity: 0.85; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 4.5rem 1.5rem; }
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--light-gray); }
+    .services-intro { max-width: 560px; margin-bottom: 2.5rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .service-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.12); transform: translateY(-2px); }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--red);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.4rem;
+    }
+    .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .service-card p { font-size: 0.88rem; color: #555; }
+
+    /* ── HOURS ── */
+    #hours { background: var(--white); }
+    .hours-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .hours-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .hours-table tr { border-bottom: 1px solid #eee; }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td { padding: 0.65rem 0; font-size: 0.95rem; }
+    .hours-table td:last-child { text-align: right; font-weight: 600; }
+    .hours-table .closed { color: #888; font-weight: 400; }
+    .hours-table .today { background: #fff8f8; }
+    .hours-table .today td:first-child { font-weight: 700; color: var(--red); }
+
+    .contact-block { margin-top: 1rem; }
+    .contact-block h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    .contact-icon {
+      width: 40px; height: 40px;
+      background: var(--light-gray);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-row a { color: var(--charcoal); text-decoration: none; font-weight: 600; }
+    .contact-row a:hover { color: var(--red); }
+    .map-placeholder {
+      margin-top: 1.5rem;
+      background: #e8e8e8;
+      border-radius: 8px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 0.9rem;
+      text-align: center;
+      gap: 0.4rem;
+    }
+    .map-placeholder .pin { font-size: 2rem; }
+
+    /* ── WHY US ── */
+    #why { background: var(--charcoal); color: var(--white); }
+    #why h2 { color: var(--white); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .why-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .why-card .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .why-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--white); }
+    .why-card p { font-size: 0.85rem; color: #aaa; }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--red);
+      color: var(--white);
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+    }
+    .cta-banner h2 { color: var(--white); font-size: 2rem; margin-bottom: 0.5rem; }
+    .cta-banner p { opacity: 0.88; margin-bottom: 1.75rem; font-size: 1.05rem; }
+    .btn-white {
+      background: var(--white);
+      color: var(--red);
+      padding: 0.85rem 2.2rem;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111;
+      color: #888;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.85rem;
+    }
+    footer strong { color: #ccc; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav ul { display: none; }
+      .hours-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .trust-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">The <span>Oil</span> Doctors</div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="tel:2483071065" class="nav-cta">Call Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Madison Heights, MI</div>
+  <h1>Your Car Deserves<br /><span>Expert Care.</span></h1>
+  <p>Fast, honest, and affordable auto service from the team that treats your vehicle like their own.</p>
+  <div class="hero-btns">
+    <a href="tel:2483071065" class="btn-primary">📞 Call (248) 307-1065</a>
+    <a href="#services" class="btn-outline">See Our Services</a>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><strong>6</strong><span>Services Offered</span></div>
+  <div class="trust-item"><strong>6 Days</strong><span>Open Per Week</span></div>
+  <div class="trust-item"><strong>Fast</strong><span>Same-Day Service</span></div>
+  <div class="trust-item"><strong>Local</strong><span>Madison Heights</span></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-intro">
+      <div class="section-label">What We Do</div>
+      <h2>Services We Offer</h2>
+      <p style="color:#555;">From routine maintenance to diagnostics, we keep your vehicle running at its best.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🛢️</div>
+        <div>
+          <h3>Oil Change</h3>
+          <p>Quick, clean, and done right. Conventional, synthetic blend, or full synthetic available.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌬️</div>
+        <div>
+          <h3>Air &amp; Cabin Filter Replacement</h3>
+          <p>Protect your engine and improve cabin air quality with fresh filters.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <div>
+          <h3>Auto Engine Diagnostic</h3>
+          <p>Check engine light on? We'll scan your vehicle and explain exactly what's going on.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔋</div>
+        <div>
+          <h3>Battery</h3>
+          <p>Battery testing, replacement, and terminal cleaning to ensure reliable starts.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛑</div>
+        <div>
+          <h3>Brakes</h3>
+          <p>Brake inspection, pad and rotor replacement — stop safely with confidence.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⬤</div>
+        <div>
+          <h3>Tires</h3>
+          <p>Tire rotation, balancing, and pressure checks to extend the life of your tires.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS & CONTACT -->
+<section id="hours">
+  <div class="container">
+    <div class="hours-layout">
+      <div>
+        <div class="section-label">When We're Open</div>
+        <h2>Hours of Operation</h2>
+        <table class="hours-table">
+          <tr>
+            <td>Monday</td>
+            <td class="closed">Closed</td>
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td>8 AM – 7 PM</td>
+          </tr>
+          <tr>
+            <td>Wednesday</td>
+            <td>8 AM – 7 PM</td>
+          </tr>
+          <tr>
+            <td>Thursday</td>
+            <td>8 AM – 7 PM</td>
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td>8 AM – 7 PM</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>8 AM – 6 PM</td>
+          </tr>
+          <tr>
+            <td>Sunday</td>
+            <td>10 AM – 5 PM</td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <div class="section-label">Find Us</div>
+        <h2>Contact &amp; Location</h2>
+        <div class="contact-block">
+          <div class="contact-row">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div style="font-size:0.78rem;color:#888;">Phone</div>
+              <a href="tel:2483071065">(248) 307-1065</a>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div style="font-size:0.78rem;color:#888;">Address</div>
+              <span style="font-weight:600;">31371 John R Rd<br />Madison Heights, MI 48071</span>
+            </div>
+          </div>
+        </div>
+        <div class="map-placeholder">
+          <div class="pin">📍</div>
+          <div><strong>31371 John R Rd</strong></div>
+          <div>Madison Heights, MI 48071</div>
+          <div style="margin-top:0.5rem;">
+            <a href="https://maps.google.com/?q=31371+John+R+Rd+Madison+Heights+MI+48071"
+               target="_blank"
+               style="color:var(--red);font-weight:700;text-decoration:none;">
+              Open in Google Maps →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="container">
+    <div class="section-label" style="color:#e57373;">Why Choose Us</div>
+    <h2>The Oil Doctors Difference</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon">⚡</div>
+        <h3>Fast Turnaround</h3>
+        <p>In and out quickly without sacrificing quality — because your time matters.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">💬</div>
+        <h3>Honest Advice</h3>
+        <p>We tell you what your car actually needs, nothing more.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🔧</div>
+        <h3>Full-Service Shop</h3>
+        <p>Oil, brakes, batteries, tires, diagnostics — one stop for your car's needs.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">📅</div>
+        <h3>6 Days a Week</h3>
+        <p>Open Tuesday through Sunday so you can come in on your schedule.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2>Ready to Book Your Next Service?</h2>
+  <p>Give us a call — we're ready to get you back on the road.</p>
+  <a href="tel:2483071065" class="btn-white">Call (248) 307-1065</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>The Oil Doctors</strong> &nbsp;|&nbsp; 31371 John R Rd, Madison Heights, MI 48071 &nbsp;|&nbsp; (248) 307-1065</p>
+  <p style="margin-top:0.4rem;">© 2026 The Oil Doctors. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
